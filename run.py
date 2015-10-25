@@ -23,7 +23,7 @@ def create_app(configfile=None):
     @app.route('/garage')
     def add_numbers():
         ajax_request = request.args.get('ajax_request', 0, type=str)
-        print "wassup!\nwassup!\nwassup!\nwassup!\nwassup!\nwassup!\nwassup!\n"
+        print ("wassup!\nwassup!\nwassup!\nwassup!\nwassup!\nwassup!\nwassup!\n")
         #open_garage()
         return jsonify(result=ajax_request)
 
