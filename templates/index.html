@@ -43,21 +43,6 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 	
-	<!-- Kitchen Light -->
-	<script type=text/javascript>
-		$(function() {
-		  $('#cmn-toggle-1').live("click", function() {
-			var id = parseInt($(this).val(), 10);
-			if($(this).is(":checked")) {
-				$.getJSON($SCRIPT_ROOT + '/garage');			
-			}
-			else {
-			   $.getJSON($SCRIPT_ROOT + '/garage');				
-			}
-			return false;
-		  });
-		});
-	</script>
 
 </head>
 
