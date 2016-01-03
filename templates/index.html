@@ -44,7 +44,7 @@
     <![endif]-->
 	
 	<!-- Kitchen Light -->
-	<!--script type=text/javascript>
+	<script type=text/javascript>
 		$(function() {
 		  $('#cmn-toggle-1').live("click", function() {
 			var id = parseInt($(this).val(), 10);
@@ -54,7 +54,7 @@
 				}, function(data) {
 				  $("#result").text(data.result);
 				});
-				return false;
+				
 			}
 			else {
 			   $.getJSON($SCRIPT_ROOT + '/garage', {
@@ -62,12 +62,12 @@
 				}, function(data) {
 				  $("#result").text(data.result);
 				});
-				return false;
+				
 			}
-			
+			return false;
 		  });
 		});
-	</script-->
+	</script>
 
 </head>
 
