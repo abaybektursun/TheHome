@@ -9,6 +9,33 @@
 <script type=text/javascript>
   $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
 </script>
+
+<!-- Kitchen Light -->
+<script type=text/javascript>
+	$(function() {
+	  $('input#cmn-toggle-1').live("click", function() {
+		var id = parseInt($(this).val(), 10);
+		if($(this).is(":checked")) {
+			$.getJSON($SCRIPT_ROOT + '/garage', {
+			  ajax_request: $('input[name="ajax_request"]').val(),
+			}, function(data) {
+			  $("#result").text(data.result);
+			});
+			return false;
+		}
+		else {
+           $.getJSON($SCRIPT_ROOT + '/garage', {
+			  ajax_request: $('input[name="ajax_request"]').val(),
+			}, function(data) {
+			  $("#result").text(data.result);
+			});
+			return false;
+        }
+		
+	  });
+	});
+</script>
+
 <head>
 
     <meta charset="utf-8">
