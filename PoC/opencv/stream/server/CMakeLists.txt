@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
-project( server )
+set (CMAKE_CXX_STANDARD 11)
+project( server CXX )
+set(raspicam_DIR "/usr/local/lib/cmake")
 find_package( OpenCV REQUIRED )
 include_directories( ${OpenCV_INCLUDE_DIRS} )
 add_executable( server.out server.cpp )
