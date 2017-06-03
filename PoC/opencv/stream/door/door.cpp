@@ -1,3 +1,4 @@
+#include <unistd.h>
 #include <stdio.h>
 #include <ctime>
 #include <string.h>
@@ -33,7 +34,7 @@ int main(int argc, char** argv )
         std::cerr << "Failed to connect to the server!\n" << std::endl;
     }
 
-    cam.set(CV_CAP_PROP_FORMAT, CV_8UC3);
+    //cam.set(CV_CAP_PROP_FORMAT, CV_8UC3);
 
     //cam.set(CV_CAP_PROP_EXPOSURE, 1+i%30);
     //cam.set(CV_CAP_PROP_EXPOSURE, 100); // 100 - the highest shutter speed
@@ -51,23 +52,43 @@ int main(int argc, char** argv )
     if (!frame.isContinuous()) {
         frame = frame.clone();
     }
+
+    char *hello = "Hello from door ";
+    for (int i = 0; i < 10; i++) {
+        send(stream_socket, hello , strlen(hello), 0 );
+    
+        int numbytes = 0;
+        char buf[30];
+        numbytes = recv(stream_socket,buf,30,0);
+        if(numbytes == -1)
+        {
+            fprintf(stderr, "Error receive \n");
+            exit(4);
+        }
+        buf[numbytes] = '\0';
+        printf("Received %s \n", buf);
+
+    }      
+
     
     int bytes = 0;
     int key;
 
-    while(1)
-    {
+    //while(1)
+    //{
         cam.grab();
         cam.retrieve(frame);
-        if ((bytes = send(stream_socket, frame.data, frameSize, 0)) < 0){
-           std::cerr << "bytes = " << bytes << std::endl;
-           break;
-        } 
+        //DEBUG
+        printf("stream socket:%d\nFrame size: %d\n",stream_socket, frameSize);
+        //DEBUG
+        //if ((bytes = send(stream_socket, frame.data, frameSize, 0)) < 0){
+           //std::cerr << "bytes = " << bytes << std::endl;
+           //break;
+        //} 
         printf("Sent\n");
-    }    
-    
+    //}    
 
     cam.release();
-
+    close(stream_socket);
     return 0;
 }
